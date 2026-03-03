@@ -80,10 +80,10 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <div className="flex items-start gap-2.5">
               <MapPin className="w-3.5 h-3.5 text-pink-500 shrink-0 mt-0.5" />
-              <span className="text-sm text-slate-300 leading-relaxed">
-                2315 Bardstown Rd<br />
-                <a href="https://www.google.com/maps/place/Imonkeys/@38.2197547,-85.6975252,14.85z/data=!4m17!1m8!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!2sImonkeys!8m2!3d38.2240889!4d-85.6895946!10e1!16s%2Fg%2F11cs3zc3x_!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!8m2!3d38.2240889!4d-85.6895946!9m1!1b1!16s%2Fg%2F11cs3zc3x_?entry=ttu" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 hover:underline transition-colors font-semibold">Louisville, KY 40205</a>
-              </span>
+              <a href="https://www.google.com/maps/place/Imonkeys/@38.2197547,-85.6975252,14z/data=!4m15!1m8!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!2sImonkeys!8m2!3d38.2240889!4d-85.6895946!10e1!16s%2Fg%2F11cs3zc3x_!3m5!1s0x88690ca6821751c7:0xe79b12af729325a9!8m2!3d38.2240889!4d-85.6895946!16s%2Fg%2F11cs3zc3x_?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-300 leading-relaxed hover:text-pink-400 transition-colors font-semibold group block">
+                <span className="group-hover:underline">2315 Bardstown Rd</span><br />
+                <span className="group-hover:underline">Louisville, KY 40205</span>
+              </a>
             </div>
             <div className="flex items-start gap-2.5">
               <Clock className="w-3.5 h-3.5 text-pink-500 shrink-0 mt-0.5" />

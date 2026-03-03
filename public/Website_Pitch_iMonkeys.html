@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Redesign Pitch - iMonkeys</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        navy: { 800: '#1A1A1A', 900: '#121212', 950: '#0A0A0A' },
+                        pink: { 400: '#FF4DA6', 500: '#FF1075', 600: '#E6005C' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background-color: rgba(26, 26, 26, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #FF4DA6, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .img-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .img-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 77, 166, 0.4);
+        }
+
+        /* Ensure styles print exactly as they appear on screen */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: #0A0A0A !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            @page {
+                margin: 0;
+            }
+
+            body {
+                padding: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased w-full max-w-[900px] mx-auto p-12 bg-navy-950 text-slate-100">
+
+    <!-- Header -->
+    <header class="mb-12 border-b border-white/10 pb-10">
+        <div class="mb-4 text-pink-500">
+            <i data-lucide="layout-template" class="w-12 h-12"></i>
+        </div>
+        <h1 class="text-4xl font-black tracking-tight mb-4">
+            Premium Website Redesign <br />
+            <span class="text-gradient">&amp; Brand Upgrade</span>
+        </h1>
+        <p class="text-xl text-slate-300 leading-relaxed font-light mb-6">
+            Your website is your digital storefront. I've built a brand new, lightning-fast digital experience designed
+            to convert local traffic into foot traffic.
+        </p>
+        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-pink-500">
+            <p class="text-lg font-medium text-white italic">
+                "A premium look for a premium repair shop. Built for mobile, optimized for Google, and ready to grow
+                your business."
+            </p>
+        </div>
+    </header>
+
+    <!-- Before & After Section -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-black mb-8 flex items-center gap-2">
+            <i data-lucide="image" class="w-6 h-6 text-pink-400"></i> The Transformation
+        </h2>
+
+        <!-- Desktop Comparison -->
+        <h3 class="text-xl font-bold mb-4 text-slate-300 border-b border-white/10 pb-2">Desktop Experience</h3>
+        <div class="grid md:grid-cols-2 gap-8 mb-10">
+            <!-- Desktop Before -->
+            <div class="flex flex-col gap-3">
+                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest text-center">Before</h4>
+                <div
+                    class="border border-white/10 rounded-xl overflow-hidden bg-navy-900 p-2 opacity-80 filter grayscale-[30%] shadow-lg">
+                    <img src="before_desktop.png" alt="Old Desktop Site" class="w-full h-auto rounded-lg object-top"
+                        style="max-height: 400px; object-fit: cover;" />
+                </div>
+            </div>
+            <!-- Desktop After -->
+            <div class="flex flex-col gap-3">
+                <h4 class="text-sm font-bold text-pink-400 uppercase tracking-widest text-center">After (New Site)</h4>
+                <div
+                    class="border-2 border-pink-500/50 rounded-xl overflow-hidden bg-navy-900 p-2 relative shadow-xl shadow-pink-500/10 h-full">
+                    <img src="user_after_desktop.png" alt="New Desktop Site" class="w-full h-auto rounded-lg object-top"
+                        style="max-height: 400px; object-fit: cover;" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Tablet Comparison -->
+        <h3 class="text-xl font-bold mb-4 text-slate-300 border-b border-white/10 pb-2">Tablet Experience</h3>
+        <div class="grid grid-cols-2 gap-6 mb-10">
+            <!-- Tablet Before -->
+            <div class="col-span-1 flex flex-col gap-3 max-w-[400px] mx-auto w-full">
+                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest text-center">Before (Tablet)</h4>
+                <div
+                    class="border border-white/10 rounded-[1rem] overflow-hidden bg-navy-900 p-2 opacity-80 filter grayscale-[30%] shadow-lg aspect-[3/4]">
+                    <img src="before_tablet.png" alt="Old Tablet Site"
+                        class="w-full h-full rounded-[0.5rem] object-top object-cover" />
+                </div>
+            </div>
+            <!-- Tablet After -->
+            <div class="col-span-1 flex flex-col gap-3 max-w-[400px] mx-auto w-full">
+                <h4 class="text-sm font-bold text-pink-400 uppercase tracking-widest text-center">After (Tablet)</h4>
+                <div
+                    class="border-2 border-pink-500/50 rounded-[1rem] overflow-hidden bg-navy-900 p-2 relative shadow-xl shadow-pink-500/10 h-full aspect-[3/4]">
+                    <img src="user_after_tablet.png" alt="New Tablet Site"
+                        class="w-full h-full rounded-[0.5rem] object-top object-cover" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Comparison -->
+        <h3 class="text-xl font-bold mb-4 text-slate-300 border-b border-white/10 pb-2">Mobile Experience</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Mobile Before -->
+            <div class="col-span-1 lg:col-start-2 flex flex-col gap-3 max-w-[280px] mx-auto w-full">
+                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest text-center">Before (Mobile)</h4>
+                <div
+                    class="border border-white/10 rounded-[2rem] overflow-hidden bg-navy-900 p-2 opacity-80 filter grayscale-[30%] shadow-lg aspect-[9/19]">
+                    <img src="before_mobile.png" alt="Old Mobile Site"
+                        class="w-full h-full rounded-[1.5rem] object-top object-cover" />
+                </div>
+            </div>
+
+            <!-- Mobile After -->
+            <div class="col-span-1 flex flex-col gap-3 max-w-[280px] mx-auto w-full">
+                <h4 class="text-sm font-bold text-pink-400 uppercase tracking-widest text-center">After (Mobile)</h4>
+                <div
+                    class="border-2 border-pink-500/50 rounded-[2rem] overflow-hidden bg-navy-900 p-2 relative shadow-xl shadow-pink-500/10 h-full aspect-[9/19]">
+                    <img src="user_after_mobile.png" alt="New Mobile Site"
+                        class="w-full h-full rounded-[1.5rem] object-top object-cover" />
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Premium CTA linking to real site -->
+        <div class="mt-14 mb-4 flex justify-center">
+            <a href="https://imonkeys.netlify.app/" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-pink-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 rounded-full font-bold text-white text-lg transition-all duration-300 shadow-[0_10px_40px_rgba(255,16,117,0.4)] hover:shadow-[0_15px_50px_rgba(255,16,117,0.6)] hover:-translate-y-1 group">
+                <i data-lucide="rocket" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                Test Drive The Live Interactive Site
+                <i data-lucide="arrow-right"
+                    class="w-5 h-5 ml-1 opacity-80 group-hover:translate-x-1 group-hover:opacity-100 transition-all"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- What You're Getting -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-black mb-8">What You're Getting</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div
+                    class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
+                    <i data-lucide="smartphone" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Mobile-First Design</h3>
+                <p class="text-sm text-slate-300">Over 80% of repair searches happen on a phone. The new site is
+                    aggressively optimized for mobile devices, making it incredibly easy to tap-to-call or find
+                    directions.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Local SEO Framework</h3>
+                <p class="text-sm text-slate-300">Built with modern code standards, semantic HTML, and proper meta tags
+                    so Google knows exactly who you are and where you rank for "phone repair Louisville".</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <div
+                    class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Lightning Fast Speed</h3>
+                <p class="text-sm text-slate-300">Modern customers won't wait for a slow site to load. I use
+                    cutting-edge web technology (React/Vite) to ensure the site loads nearly instantly, preventing
+                    drop-offs.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="w-10 h-10 rounded-lg bg-pink-500/10 text-pink-400 flex items-center justify-center mb-4">
+                    <i data-lucide="palette" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Premium Aesthetics</h3>
+                <p class="text-sm text-slate-300">Say goodbye to generic templates. The site uses custom glassmorphism,
+                    rich gradients, and micro-animations to position iMonkeys as a high-end, trustworthy business.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Pricing & Hosting Options -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-black mb-4">Investment &amp; Hosting Options</h2>
+        <p class="text-slate-300 mb-8">
+            A great website needs a secure, fast home. I offer two routes depending on how much technical overhead you
+            want to handle yourself.
+        </p>
+
+        <div class="space-y-6">
+
+            <!-- Option 1: Managed (Recommended) -->
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden border-pink-500/50"
+                style="box-shadow: 0 0 40px -10px rgba(255, 16, 117, 0.2);">
+                <div class="absolute top-0 right-0 bg-pink-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg">
+                    HIGHLY RECOMMENDED</div>
+
+                <h4 class="text-xl font-bold text-white mb-1">Option 1: Fully Managed Hosting &amp; Security</h4>
+                <div class="text-slate-400 text-sm mb-6">"Set it and forget it. I handle the servers, you run the
+                    shop."</div>
+
+                <div
+                    class="bg-black/40 rounded-xl p-5 mb-6 flex flex-wrap gap-8 items-center border border-pink-500/20">
+                    <div>
+                        <div class="text-xs text-pink-300 uppercase tracking-wide font-semibold">One-Time Setup</div>
+                        <div class="font-black text-3xl text-white">$300</div>
+                    </div>
+                    <div class="text-slate-500 text-2xl font-light">+</div>
+                    <div>
+                        <div class="text-xs text-pink-300 uppercase tracking-wide font-semibold">Monthly Hosting</div>
+                        <div class="font-black text-3xl text-pink-400">$50 <span
+                                class="text-sm font-normal text-slate-400">/ mo</span></div>
+                    </div>
+                </div>
+
+                <ul class="text-sm space-y-3 text-slate-200">
+                    <li class="flex items-start gap-2"><i data-lucide="check"
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>Zero Technical
+                            Headaches:</strong> I host the site on ultra-fast Hostinger servers and manage the domain
+                        connections.</li>
+                    <li class="flex items-start gap-2"><i data-lucide="check"
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>AI-Powered Security:</strong>
+                        Automated deployment of SSL certificates, firewall rules, and malware protection to keep your
+                        business safe.</li>
+                    <li class="flex items-start gap-2"><i data-lucide="check"
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>Routine Backups &amp;
+                            Updates:</strong> Server monitoring to prevent downtime. If anything ever breaks, it's my
+                        job to fix it, absolutely free of charge.</li>
+                </ul>
+            </div>
+
+            <!-- Option 2: DIY -->
+            <div class="bg-navy-900 border border-white/10 p-8 rounded-3xl">
+                <h4 class="text-xl font-bold text-white mb-1">Option 2: Hand-Off / DIY Hosting</h4>
+                <div class="text-slate-400 text-sm mb-6">"I will figure out the technical server setup myself."</div>
+
+                <div class="bg-black/30 rounded-xl p-5 mb-6 inline-block">
+                    <div class="text-xs text-slate-400 uppercase tracking-wide font-semibold">One-Time Fee</div>
+                    <div class="font-black text-3xl text-white">$400 <span
+                            class="text-sm font-normal text-slate-400">(No monthly costs from me)</span></div>
+                </div>
+
+                <div class="bg-rose-500/5 border border-rose-500/20 rounded-xl p-5 text-sm text-slate-300 space-y-3">
+                    <p class="font-medium text-rose-300 flex items-center gap-2"><i data-lucide="alert-triangle"
+                            class="w-4 h-4"></i> The Hidden Costs of Doing It Yourself:</p>
+                    <ul class="list-disc pl-5 space-y-2 marker:text-rose-500/50">
+                        <li><strong>Learning Curve:</strong> You will need to purchase your own hosting plan, configure
+                            DNS records, and manually deploy the code to a live server environment.</li>
+                        <li><strong>Security Risks:</strong> You are solely responsible for setting up SSL certificates
+                            (so browsers don't mark your site as "Not Secure") and preventing malware attacks.</li>
+                        <li><strong>SEO Hits:</strong> If your unmanaged server goes down or loads slowly, Google
+                            penalizes your local search rankings.</li>
+                        <li><strong>No Support:</strong> If the site goes offline or you accidentally break a setting,
+                            you will be on your own to debug the server errors.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

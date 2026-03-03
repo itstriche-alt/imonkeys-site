@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Smartphone, Battery, Square, Monitor, PenTool, Bot, Wrench, PhoneCall, Info } from 'lucide-react';
+import { Smartphone, Battery, Square, Monitor, PenTool, Bot, Wrench, PhoneCall, Info, MapPin } from 'lucide-react';
 
 import Papa from 'papaparse';
 
@@ -18,7 +18,7 @@ const SERVICES = [
 export default function RepairEstimate() {
   const [pricingData, setPricingData] = useState<Record<string, [string, number][] | null>>({ samsung: null });
   const [currentService, setCurrentService] = useState<string | null>(null);
-  const [currentModelPrice, setCurrentModelPrice] = useState<string>('');
+  const [currentModelName, setCurrentModelName] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
   const [isCall, setIsCall] = useState(false);
   const [wiggle, setWiggle] = useState(false);
@@ -50,7 +50,7 @@ export default function RepairEstimate() {
 
   const handleServiceSelect = (id: string) => {
     setCurrentService(id);
-    setCurrentModelPrice('');
+    setCurrentModelName('');
     setShowResult(false);
   };
 
@@ -67,7 +67,7 @@ export default function RepairEstimate() {
       return;
     }
 
-    if (!currentModelPrice) {
+    if (!currentModelName) {
       document.getElementById('modelSelect')?.focus();
       return;
     }
@@ -86,7 +86,7 @@ export default function RepairEstimate() {
   const ActiveIconComponent = activeIcon;
 
   return (
-    <section id="estimate" className="py-16 md:py-24 px-6 flex items-center justify-center relative z-10">
+    <section id="estimate" className="py-16 md:py-24 px-6 flex flex-col items-center justify-center relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -178,16 +178,16 @@ export default function RepairEstimate() {
                 <div className="relative">
                   <select
                     id="modelSelect"
-                    value={currentModelPrice}
+                    value={currentModelName}
                     onChange={(e) => {
-                      setCurrentModelPrice(e.target.value);
+                      setCurrentModelName(e.target.value);
                       if (showResult) setShowResult(false);
                     }}
                     className="w-full p-3.5 pl-4 pr-10 bg-navy-900/70 border border-white/10 rounded-xl text-slate-100 text-sm font-medium appearance-none outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all cursor-pointer"
                   >
                     <option value="">— choose model —</option>
                     {pricingData[currentService]?.map(([name, price]) => (
-                      <option key={name as string} value={price as number}>
+                      <option key={name as string} value={name as string}>
                         {name}
                       </option>
                     ))}
@@ -243,7 +243,9 @@ export default function RepairEstimate() {
                       ) : (
                         <div className="flex items-start text-white pt-1">
                           <span className="text-2xl sm:text-3xl font-bold mt-1 sm:mt-1.5 mr-1 text-slate-400">$</span>
-                          <span className="text-6xl sm:text-7xl font-black tracking-tighter leading-none">{currentModelPrice}</span>
+                          <span className="text-6xl sm:text-7xl font-black tracking-tighter leading-none">
+                            {pricingData[currentService || '']?.find(([n]) => n === currentModelName)?.[1]}
+                          </span>
                         </div>
                       )}
                     </div>
@@ -269,6 +271,37 @@ export default function RepairEstimate() {
 
         </div>
       </motion.div>
+
+      {/* Location CTA */}
+      <motion.a
+        href="https://www.google.com/maps/place/Imonkeys/@38.2197547,-85.6975252,14z/data=!4m17!1m8!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!2sImonkeys!8m2!3d38.2240889!4d-85.6895946!10e1!16s%2Fg%2F11cs3zc3x_!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!8m2!3d38.2240889!4d-85.6895946!9m1!1b1!16s%2Fg%2F11cs3zc3x_?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-20%" }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="mt-10 inline-flex items-center gap-4 px-7 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[2rem] font-bold text-slate-300 hover:text-white transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.5)] group relative overflow-hidden cursor-pointer"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
+
+        <div className="w-10 h-10 rounded-full bg-pink-500/15 border border-pink-500/20 text-pink-400 flex items-center justify-center relative z-10 shrink-0 group-hover:bg-pink-500/25 group-hover:scale-110 transition-all duration-300 shadow-[0_0_15px_rgba(255,77,166,0.3)] group-hover:shadow-[0_0_20px_rgba(255,77,166,0.5)]">
+          <MapPin className="w-5 h-5" />
+        </div>
+
+        <div className="relative z-10 flex flex-col items-start pr-2">
+          <span className="text-[0.7rem] uppercase tracking-widest text-slate-400 font-semibold mb-0.5">Ready to fix it?</span>
+          <span className="text-[0.95rem] tracking-wide group-hover:text-pink-100 transition-colors flex items-center gap-2">
+            Get Directions to iMonkeys
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-pink-400 opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </div>
+      </motion.a>
     </section>
   );
 }
