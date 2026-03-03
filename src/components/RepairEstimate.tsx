@@ -2,55 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Smartphone, Battery, Square, Monitor, PenTool, Bot, Wrench, PhoneCall, Info } from 'lucide-react';
 
-const PRICING: Record<string, [string, number][] | null> = {
-  iphone_screen: [
-    ["iPhone 6",30],["iPhone 6s",30],["iPhone 6s Plus",35],
-    ["iPhone 7",35],["iPhone 7 Plus",40],["iPhone 8",40],
-    ["iPhone 8 Plus",45],["iPhone X",55],["iPhone XS",55],
-    ["iPhone XS Max",70],["iPhone XR",55],["iPhone 11",60],
-    ["iPhone 11 Pro",70],["iPhone 11 Pro Max",80],["iPhone 12",100],
-    ["iPhone 12 Mini",100],["iPhone 12 Pro",100],["iPhone 12 Pro Max",125],
-  ],
-  iphone_battery: [
-    ["iPhone 6",30],["iPhone 6 Plus",50],["iPhone 6S",40],
-    ["iPhone 6S Plus",55],["iPhone SE",65],["iPhone 7",63],
-    ["iPhone 7 Plus",67],["iPhone 8",60],["iPhone 8 Plus",60],
-    ["iPhone X",60],["iPhone XR",69],["iPhone XS",75],
-    ["iPhone XS Max",70],["iPhone 11",70],["iPhone 11 Pro",75],
-    ["iPhone 11 Pro Max",80],["iPhone 12",85],["iPhone 12 Pro",90],
-    ["iPhone 12 Pro Max",110],["iPhone 13",90],["iPhone 13 Mini",85],
-    ["iPhone 13 Pro",130],["iPhone 13 Pro Max",150],["iPhone 14",100],
-    ["iPhone 14 Plus",110],["iPhone 14 Pro",150],["iPhone 14 Pro Max",170],
-    ["iPhone 15",160],["iPhone 15 Plus",170],
-  ],
-  iphone_backglass: [
-    ["iPhone 8",70],["iPhone 8 Plus",70],["iPhone X",70],
-    ["iPhone XS",70],["iPhone XR",70],["iPhone 11",85],
-    ["iPhone 11 Pro",90],["iPhone 11 Pro Max",90],["iPhone 12",90],
-    ["iPhone 12 Mini",90],["iPhone 12 Pro",100],["iPhone 12 Pro Max",100],
-    ["iPhone 13",95],["iPhone 13 Mini",95],["iPhone 13 Pro",120],
-    ["iPhone 13 Pro Max",120],["iPhone 14",85],["iPhone 14 Plus",85],
-    ["iPhone 14 Pro",130],["iPhone 14 Pro Max",130],["iPhone 15",100],
-    ["iPhone 15 Plus",100],["iPhone 15 Pro",120],["iPhone 15 Pro Max",120],
-  ],
-  ipad_glass: [
-    ["iPad 4th generation",60],["iPad 5th generation",90],
-    ["iPad 6th generation",90],["iPad 7th generation",90],
-    ["iPad 8th generation",90],["iPad 9th generation",100],
-    ["iPad mini 1st generation",60],["iPad mini 2nd generation",75],
-    ["iPad mini 3rd generation",75],["iPad mini 4th generation",140],
-    ["iPad mini 5th generation",145],["iPad Air 2nd generation",170],
-    ["iPad Air 3rd generation",200],["iPad Air 4th generation",225],
-    ["iPad Pro 9.7\" (1st gen)",185],["iPad Pro 10.5\" (1st gen)",200],
-    ["iPad Pro 11\" (2nd gen)",240],["iPad Pro 11\" (3rd gen)",340],
-  ],
-  ipad_digitizer: [
-    ["iPad 5th generation",70],["iPad 6th generation",70],
-    ["iPad 8th generation",80],["iPad 9th generation",90],
-    ["iPad 10th generation",110],["iPad Air 4th generation",200],
-  ],
-  samsung: null,
-};
+import Papa from 'papaparse';
+
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8PzVv1xgXT9AJxAPX6ATThtJFgp7dUk-vY9rl5b9M2Pbe1vbj0bFfkmWNzVLl5aOd95imMBhfuuru/pub?output=csv';
 
 const SERVICES = [
   { id: 'iphone_screen', label: 'iPhone Screen Repair', icon: Smartphone },
@@ -62,12 +16,37 @@ const SERVICES = [
 ];
 
 export default function RepairEstimate() {
+  const [pricingData, setPricingData] = useState<Record<string, [string, number][] | null>>({ samsung: null });
   const [currentService, setCurrentService] = useState<string | null>(null);
   const [currentModelPrice, setCurrentModelPrice] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
   const [isCall, setIsCall] = useState(false);
   const [wiggle, setWiggle] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch(CSV_URL)
+      .then(res => res.text())
+      .then(csvText => {
+        Papa.parse(csvText, {
+          header: true,
+          complete: (results) => {
+            const data: Record<string, [string, number][] | null> = { samsung: null };
+            for (const row of results.data as any[]) {
+              const cat = row.Category?.trim();
+              const model = row.Model?.trim();
+              const price = parseFloat(row.Price);
+              if (cat && model && !isNaN(price)) {
+                if (!data[cat]) data[cat] = [];
+                data[cat]!.push([model, price]);
+              }
+            }
+            setPricingData(data);
+          }
+        });
+      })
+      .catch(err => console.error('Failed to fetch pricing:', err));
+  }, []);
 
   const handleServiceSelect = (id: string) => {
     setCurrentService(id);
@@ -108,26 +87,26 @@ export default function RepairEstimate() {
 
   return (
     <section id="estimate" className="py-16 md:py-24 px-6 flex items-center justify-center relative z-10">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20%" }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-[460px] bg-navy-950/80 backdrop-blur-2xl rounded-[24px] border border-white/10 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.6)] relative"
+        className="w-full max-w-[460px] bg-navy-950/70 backdrop-blur-3xl rounded-[24px] border border-white/10 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.8)] relative"
       >
         {/* Top Accent Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[260px] h-[1px] bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-80"></div>
 
         {/* Header */}
         <div className="px-8 pt-8 pb-6 border-b border-white/5">
-          <div className="inline-flex items-center gap-1.5 bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[0.72rem] font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-3">
+          <div className="inline-flex items-center gap-1.5 bg-pink-500/10 border border-pink-500/20 text-pink-400 font-semibold tracking-widest text-[0.72rem] uppercase px-3 py-1 rounded-full mb-3">
             <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
             Instant Pricing
           </div>
-          <h2 className="text-[1.65rem] font-extrabold text-slate-50 tracking-tight leading-[1.1]">
+          <h2 className="text-[1.65rem] font-extrabold text-white tracking-tight leading-[1.1]">
             Repair <span className="text-gradient">Estimate</span>
           </h2>
-          <p className="mt-2 text-[0.84rem] text-slate-400 leading-relaxed">
+          <p className="mt-2 text-[0.84rem] text-slate-300 font-medium leading-relaxed">
             Select your device and service to see pricing in seconds — no sign-up needed.
           </p>
         </div>
@@ -144,8 +123,8 @@ export default function RepairEstimate() {
                 Choose a repair type
               </span>
             </div>
-            
-            <motion.div 
+
+            <motion.div
               className="grid grid-cols-2 gap-2"
               animate={wiggle ? { x: [-5, 5, -5, 5, 0] } : {}}
               transition={{ duration: 0.4 }}
@@ -157,14 +136,13 @@ export default function RepairEstimate() {
                   <button
                     key={service.id}
                     onClick={() => handleServiceSelect(service.id)}
-                    className={`flex items-center gap-2 p-3 rounded-xl border text-left transition-all duration-200 relative overflow-hidden ${
-                      isSelected 
-                        ? 'bg-pink-500/10 border-pink-500/50 shadow-[inset_0_0_0_1px_rgba(230,0,111,0.3)]' 
-                        : 'bg-navy-900/50 border-white/5 hover:border-white/20 hover:bg-navy-800/50'
-                    }`}
+                    className={`flex items-center gap-2 p-3 rounded-xl border text-left transition-all duration-200 relative overflow-hidden ${isSelected
+                      ? 'bg-pink-500/10 border-pink-500/40 shadow-[inset_0_0_0_1px_rgba(230,0,111,0.3)]'
+                      : 'bg-navy-900/60 border-white/5 hover:border-white/20 hover:bg-navy-800/60 shadow-sm'
+                      }`}
                   >
                     <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-pink-400' : 'text-slate-400'}`} />
-                    <span className={`text-[0.78rem] font-semibold leading-snug ${isSelected ? 'text-pink-200' : 'text-slate-400'}`}>
+                    <span className={`text-[0.78rem] font-medium leading-snug ${isSelected ? 'text-slate-100 font-semibold' : 'text-slate-300'}`}>
                       {service.label}
                     </span>
                     {isSelected && (
@@ -183,7 +161,7 @@ export default function RepairEstimate() {
           {/* Step 2 */}
           <AnimatePresence>
             {currentService && currentService !== 'samsung' && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, height: 0, marginTop: 0 }}
                 animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
@@ -205,10 +183,10 @@ export default function RepairEstimate() {
                       setCurrentModelPrice(e.target.value);
                       if (showResult) setShowResult(false);
                     }}
-                    className="w-full p-3.5 pl-4 pr-10 bg-navy-900/80 border border-white/10 rounded-xl text-slate-200 text-sm font-medium appearance-none outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all cursor-pointer"
+                    className="w-full p-3.5 pl-4 pr-10 bg-navy-900/70 border border-white/10 rounded-xl text-slate-100 text-sm font-medium appearance-none outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all cursor-pointer"
                   >
                     <option value="">— choose model —</option>
-                    {PRICING[currentService]?.map(([name, price]) => (
+                    {pricingData[currentService]?.map(([name, price]) => (
                       <option key={name as string} value={price as number}>
                         {name}
                       </option>
@@ -243,42 +221,44 @@ export default function RepairEstimate() {
                 exit={{ opacity: 0, y: -10, height: 0 }}
                 className="mt-4 overflow-hidden rounded-2xl"
               >
-                <div className="bg-gradient-to-br from-navy-800 to-navy-900 border border-pink-500/30 rounded-2xl p-6 relative overflow-hidden">
+                <div className="bg-gradient-to-br from-navy-800 to-navy-900 border border-pink-500/30 shadow-xl rounded-2xl p-6 relative overflow-hidden">
                   {/* Glow blob inside result */}
                   <div className="absolute -top-10 -right-10 w-[140px] h-[140px] rounded-full bg-pink-500/20 blur-[40px] pointer-events-none"></div>
-                  
-                  <div className="flex items-start justify-between gap-3 relative z-10">
-                    <div>
-                      <div className="text-[0.72rem] font-bold uppercase tracking-widest text-indigo-300 mb-1.5">
+
+                  <div className="flex items-start justify-between gap-4 relative z-10">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs sm:text-sm font-bold uppercase tracking-widest text-indigo-300 mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
                         Estimated Repair Cost
                       </div>
                       {isCall ? (
-                        <div className="text-2xl font-bold text-pink-300 tracking-tight">
-                          Call for Pricing
-                          <a href="tel:+15024435435" className="mt-3 inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-br from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 text-white rounded-lg font-bold text-sm shadow-[0_4px_16px_rgba(16,185,129,0.3)] transition-all active:scale-95">
+                        <div className="pt-2">
+                          <div className="text-2xl sm:text-3xl font-black text-pink-300 tracking-tight mb-4">
+                            Call for Pricing
+                          </div>
+                          <a href="tel:+15024435435" className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-br from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 text-white rounded-xl font-bold text-sm shadow-[0_4px_16px_rgba(16,185,129,0.3)] transition-all active:scale-95">
                             <PhoneCall className="w-4 h-4" />
                             (502) 443-5435
                           </a>
                         </div>
                       ) : (
-                        <div className="text-5xl font-extrabold text-white tracking-tighter leading-none">
-                          <sup className="text-2xl font-bold align-super mr-1">$</sup>
-                          {currentModelPrice}
+                        <div className="flex items-start text-white pt-1">
+                          <span className="text-2xl sm:text-3xl font-bold mt-1 sm:mt-1.5 mr-1 text-slate-400">$</span>
+                          <span className="text-6xl sm:text-7xl font-black tracking-tighter leading-none">{currentModelPrice}</span>
                         </div>
                       )}
                     </div>
-                    <div className="w-11 h-11 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center shrink-0 text-pink-400">
-                      <ActiveIconComponent className="w-6 h-6" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center shrink-0 text-pink-400 transition-transform hover:scale-105">
+                      <ActiveIconComponent className="w-6 h-6 sm:w-7 sm:h-7" />
                     </div>
                   </div>
 
                   <div className="h-[1px] bg-pink-500/20 my-4 relative z-10"></div>
-                  
-                  <div className="flex items-center gap-1.5 text-[0.78rem] text-indigo-300 relative z-10">
+
+                  <div className="flex items-center gap-1.5 text-[0.78rem] text-slate-300 font-medium relative z-10">
                     <Info className="w-3.5 h-3.5 shrink-0" />
                     <span>
-                      {isCall 
-                        ? 'Tap to call us for a Samsung repair quote.' 
+                      {isCall
+                        ? 'Tap to call us for a Samsung repair quote.'
                         : 'Price is an estimate. Final cost confirmed at drop-off.'}
                     </span>
                   </div>

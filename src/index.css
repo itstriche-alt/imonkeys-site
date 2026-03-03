@@ -2,48 +2,75 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #020617;
-  --color-navy-900: #06123A;
-  --color-navy-800: #0A1B52;
-  --color-navy-700: #102670;
-  --color-pink-600: #C4005E;
-  --color-pink-500: #E6006F;
-  --color-pink-400: #FF1A8C;
+  --color-navy-950: #0A0A0A;
+  --color-navy-900: #121212;
+  --color-navy-800: #1A1A1A;
+  --color-navy-700: #262626;
+  --color-pink-600: #E6005C;
+  --color-pink-500: #FF1075;
+  --color-pink-400: #FF4DA6;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 140px;
+  /* Offsets anchor links so nav bar doesn't cover titles */
+}
+
 body {
-  @apply bg-navy-950 text-slate-50 font-sans antialiased overflow-x-hidden;
+  @apply bg-navy-950 text-slate-50 font-sans antialiased overflow-x-clip;
 }
 
 /* Custom Utilities */
 @layer utilities {
   .glass-panel {
-    @apply bg-navy-900/40 backdrop-blur-xl border border-white/10 shadow-2xl;
+    background-color: color-mix(in srgb, #0ea5e9 20%, transparent);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid color-mix(in srgb, #7dd3fc 30%, transparent);
+    box-shadow: 0 4px 30px rgba(14, 165, 233, 0.25);
   }
-  
+
   .glass-card {
-    @apply bg-navy-800/30 backdrop-blur-md border border-white/5 shadow-xl transition-all duration-300;
+    background-color: color-mix(in srgb, var(--color-navy-800) 30%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-indigo-400;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--color-pink-400), #818cf8);
   }
 
   .glow-border {
-    @apply relative overflow-hidden rounded-2xl;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
   }
-  
+
   .glow-border::before {
     content: '';
-    @apply absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-br from-pink-500/50 via-transparent to-indigo-500/50 opacity-0 transition-opacity duration-300 pointer-events-none;
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 16, 117, 0.5), transparent, rgba(99, 102, 241, 0.5));
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
 
   .glow-border:hover::before {
-    @apply opacity-100;
+    opacity: 1;
   }
 }
 
@@ -82,6 +109,11 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5%, 5%) scale(1.1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(5%, 5%) scale(1.1);
+  }
 }

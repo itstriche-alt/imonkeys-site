@@ -24,9 +24,9 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-16 md:py-24 px-6 relative z-10">
+    <section id="services" className="py-12 md:py-16 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20%" }}
@@ -56,18 +56,18 @@ export default function Services() {
                 className="group relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 <div className="glass-card rounded-3xl p-8 h-full relative overflow-hidden glow-border flex flex-col" style={{ backgroundImage: service.bgImage }}>
-                  
+
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className="w-7 h-7 text-white" />
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{service.title}</h3>
                   <p className="text-slate-300 leading-relaxed mb-8 flex-grow">
                     {service.description}
                   </p>
-                  
+
                   <ul className="space-y-3">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-200">
@@ -79,12 +79,7 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  {/* Hidden content reveal on hover */}
-                  <div className="mt-8 pt-6 border-t border-white/10 overflow-hidden">
-                    <div className="translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center text-pink-400 font-bold text-sm uppercase tracking-wider">
-                      Learn More <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                  </div>
+
                 </div>
               </motion.div>
             );

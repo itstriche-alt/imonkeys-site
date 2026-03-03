@@ -13,9 +13,9 @@ export default function App() {
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
       </div>
-      
+
       <Nav />
-      
+
       <main>
         <Hero />
         <RepairEstimate />
@@ -23,7 +23,7 @@ export default function App() {
         <Reviews />
         <Location />
       </main>
-      
+
       <Footer />
     </div>
   );
