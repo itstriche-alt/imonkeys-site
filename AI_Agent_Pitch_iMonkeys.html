@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Agent Pitch Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        navy: { 800: '#1A1A1A', 900: '#121212', 950: '#0A0A0A' },
+                        pink: { 400: '#FF4DA6', 500: '#FF1075', 600: '#E6005C' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background-color: rgba(26, 26, 26, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #FF4DA6, #818cf8);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Ensure styles print exactly as they appear on screen */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: #0A0A0A !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            @page {
+                margin: 0;
+            }
+
+            body {
+                padding: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased w-full max-w-[850px] mx-auto p-12 bg-navy-950 text-slate-100">
+
+    <!-- Header -->
+    <header class="mb-12 border-b border-white/10 pb-10">
+        <div class="mb-4 text-pink-500">
+            <i data-lucide="bot" class="w-12 h-12"></i>
+        </div>
+        <h1 class="text-4xl font-black tracking-tight mb-4">
+            Simple Inbound AI Quote &amp; <br />
+            <span class="text-gradient">General FAQ Agent</span>
+        </h1>
+        <p class="text-xl text-slate-300 leading-relaxed font-light mb-6">
+            I’ve been building AI voice systems for local businesses, and I’d like to set one up for you. This gives you
+            an intelligent phone agent:
+        </p>
+        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-pink-500">
+            <p class="text-lg font-medium text-white italic">
+                "Your shop's smartest employee — available 24/7, never puts customers on hold."
+            </p>
+        </div>
+    </header>
+
+    <!-- Sample Interaction -->
+    <section class="mb-12">
+        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+            <i data-lucide="message-square" class="w-4 h-4"></i> Sample Interaction
+        </h2>
+        <div class="flex flex-col gap-4">
+            <div class="glass-card p-4 px-6 rounded-2xl rounded-tl-sm self-start max-w-[85%] text-slate-200">
+                "Hi, how much would it cost to fix my iPhone 13 screen?"
+            </div>
+            <div
+                class="bg-indigo-600/20 border border-indigo-500/30 p-4 px-6 rounded-2xl rounded-br-sm self-end max-w-[85%] text-white">
+                "Starting at $90 — though the final price may vary depending on the condition of your device after our
+                technician takes a look in person. Want our address or hours?"
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- What it does -->
+        <div class="glass-card p-8 rounded-3xl">
+            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i> What It Does
+            </h3>
+            <ul class="space-y-4">
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">Instant repair price quotes</strong> — gives accurate starting
+                        prices for screens, batteries, back glass, and more.</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">Answers common questions</strong> — hours, location, directions,
+                        turnaround time, walk-in policy.</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">Explains what you buy/sell</strong> — accepts devices, warranty
+                        info, data transfer inclusions.</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">After-hours availability</strong> — handles questions at 2am just
+                        like 2pm; never miss a lead.</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">Filters unqualified calls</strong> — routes only calls needing a
+                        human to your team (for 24/7 setups).</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></div>
+                    <div><strong class="text-white">Consistent responses</strong> — every customer gets the same
+                        accurate info, zero guessing.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- What it doesn't do -->
+        <div class="glass-card p-8 rounded-3xl border-slate-800">
+            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <i data-lucide="x-circle" class="w-5 h-5 text-rose-500"></i> What It Doesn't Do
+            </h3>
+            <ul class="space-y-4 text-slate-300">
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"></div>
+                    <div><strong class="text-white">Book or schedule appointments</strong></div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"></div>
+                    <div><strong class="text-white">Give exact quotes for buying/selling</strong> — customers are
+                        directed to come in for an in-person assessment.</div>
+                </li>
+            </ul>
+            <p class="mt-6 text-sm text-slate-400 italic">
+                * Note: Appointment booking and exact buy/sell quotes can be added in the future over time as customized
+                upgrades.
+            </p>
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Setup & Pricing -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-black mb-8">Pricing &amp; Management</h2>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-navy-900 border border-white/10 rounded-2xl p-6">
+                <div class="text-pink-400 font-black text-2xl mb-2">$200</div>
+                <h4 class="font-bold text-white mb-3">One-Time Setup Fee</h4>
+                <p class="text-sm text-slate-300">
+                    This covers building and customizing the agent, structuring the knowledge base with your specific
+                    repair quotes, and fully testing the AI.
+                </p>
+            </div>
+            <div class="bg-navy-900 border border-white/10 rounded-2xl p-6">
+                <div class="text-pink-400 font-black text-2xl mb-2">$150<span
+                        class="text-base text-slate-400 font-medium">/mo</span></div>
+                <h4 class="font-bold text-white mb-3">AI Management Retainer</h4>
+                <p class="text-sm text-slate-300">
+                    Covers ongoing optimization: updating hours/prices, adding new devices to the KB, and reviewing call
+                    logs to continuously improve the AI.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Coverage Options -->
+    <section class="mb-12">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5 text-indigo-400"></i> AI Agent Coverage Options
+        </h3>
+        <p class="text-slate-300 mb-6">
+            To keep things transparent, the direct cost of the AI software itself is paid directly to the providers with
+            no markup (ElevenLabs for the AI brain, and Twilio for the actual phone number and calling minutes). Choose
+            the plan that fits your shop's needs:
+        </p>
+
+        <div class="space-y-6">
+
+            <!-- Option 1 -->
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden border-indigo-500/30">
+                <div class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    RECOMMENDED</div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Option 1: The "After-Hours Catch-All"</h4>
+                        <div class="text-slate-400 text-sm mt-1">Perfect for capturing the 76% of the week when your
+                            shop is closed.</div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 rounded-xl p-4 mb-4 flex gap-8">
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Software &amp; Line Cost</div>
+                        <div class="font-bold text-lg text-white">~$25 / mo <span
+                                class="text-xs font-normal text-slate-400">($22 AI + ~$3 phone line)</span></div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Total Investment</div>
+                        <div class="font-bold text-lg text-indigo-400">~$175 / mo <span
+                                class="text-xs font-normal text-slate-400">(with retainer)</span></div>
+                    </div>
+                </div>
+
+                <ul class="text-sm space-y-3 text-slate-300">
+                    <li><strong class="text-white">What's included:</strong> ~200 minutes of conversational AI time per
+                        month.</li>
+                    <li><strong class="text-white">Why it works:</strong> After-hours calls will use roughly 120–180
+                        minutes a month. This comfortably covers all evening and weekend calls currently going to
+                        voicemail.</li>
+                    <li class="text-emerald-400 font-medium pt-2 border-t border-white/10"><strong
+                            class="text-white">The ROI:</strong> If this catches just <u>two</u> screen repairs a month
+                        that would have otherwise gone to a competitor, the entire system pays for itself.</li>
+                </ul>
+            </div>
+
+            <!-- Option 2 -->
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Option 2: The "24/7 Front Desk"</h4>
+                        <div class="text-slate-400 text-sm mt-1">Perfect if your staff is too busy to answer during the
+                            day.</div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 rounded-xl p-4 mb-4 flex gap-8">
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Software &amp; Line Cost</div>
+                        <div class="font-bold text-lg text-white">~$108 / mo <span
+                                class="text-xs font-normal text-slate-400">($99 AI + ~$9 phone line)</span></div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Total Investment</div>
+                        <div class="font-bold text-lg text-indigo-400">~$258 / mo <span
+                                class="text-xs font-normal text-slate-400">(with retainer)</span></div>
+                    </div>
+                </div>
+
+                <ul class="text-sm space-y-3 text-slate-300">
+                    <li><strong class="text-white">What's included:</strong> ~1,000 minutes of conversational AI time
+                        per month.</li>
+                    <li><strong class="text-white">Why it works:</strong> The AI answers every call. It automatically
+                        handles repetitive questions ("how much for an iPhone 13 screen?", "what are your hours?") and
+                        only forwards complex calls to human staff.</li>
+                    <li class="text-emerald-400 font-medium pt-2 border-t border-white/10"><strong
+                            class="text-white">The ROI:</strong> You effectively get a full-time receptionist who never
+                        calls in sick, never takes a break, and costs a fraction of minimum wage.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
