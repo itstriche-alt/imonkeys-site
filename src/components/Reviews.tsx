@@ -78,7 +78,7 @@ export default function Reviews() {
                   {review.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">{review.name}</h4>
+                  <p className="font-bold text-white text-sm">{review.name}</p>
                   <span className="text-xs text-slate-400 font-medium">Verified Customer</span>
                 </div>
               </div>

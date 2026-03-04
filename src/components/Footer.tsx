@@ -40,7 +40,7 @@ export default function Footer() {
 
         {/* Col 2 — Navigate */}
         <div className="flex flex-col gap-4">
-          <h4 className="text-xs font-bold text-white uppercase tracking-widest">Navigate</h4>
+          <p className="text-xs font-bold text-white uppercase tracking-widest">Navigate</p>
           <nav className="flex flex-col gap-2.5">
             {[
               { label: 'Home', href: '#home' },
@@ -62,7 +62,7 @@ export default function Footer() {
 
         {/* Col 3 — Contact */}
         <div className="flex flex-col gap-4">
-          <h4 className="text-xs font-bold text-white uppercase tracking-widest">Contact</h4>
+          <p className="text-xs font-bold text-white uppercase tracking-widest">Contact</p>
           <div className="flex flex-col gap-3">
             <a
               href="tel:+15024435435"
@@ -83,7 +83,7 @@ export default function Footer() {
 
         {/* Col 4 — Hours & Location */}
         <div className="flex flex-col gap-4">
-          <h4 className="text-xs font-bold text-white uppercase tracking-widest">Visit Us</h4>
+          <p className="text-xs font-bold text-white uppercase tracking-widest">Visit Us</p>
           <div className="flex flex-col gap-3">
             <div className="flex items-start gap-2.5">
               <MapPin className="w-3.5 h-3.5 text-pink-500 shrink-0 mt-0.5" />
@@ -106,10 +106,10 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="max-w-7xl mx-auto px-6 py-5 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-slate-500 text-xs">
+        <p className="text-slate-400 text-xs">
           &copy; {new Date().getFullYear()} iMonkeys. All rights reserved.
         </p>
-        <p className="text-slate-500 text-xs">
+        <p className="text-slate-400 text-xs">
           Louisville, KY · Device Repair &amp; Buy/Sell
         </p>
       </div>
