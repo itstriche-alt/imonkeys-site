@@ -16,8 +16,8 @@ export default function Footer() {
                 src={logo}
                 alt="iMonkeys"
                 className="w-full h-auto object-contain"
-                width="220"
-                height="82"
+                width="400"
+                height="148"
                 loading="lazy"
               />
             </div>

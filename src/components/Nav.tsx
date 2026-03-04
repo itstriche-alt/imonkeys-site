@@ -61,8 +61,8 @@ export default function Nav() {
                 alt="iMonkeys Logo"
                 className="h-8 sm:h-10 w-auto object-contain"
                 fetchPriority="high"
-                width="269"
-                height="100"
+                width="400"
+                height="148"
               />
             </div>
           </a>

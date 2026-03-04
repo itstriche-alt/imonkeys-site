@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imonkeys.netlify.app/sitemap.xml
