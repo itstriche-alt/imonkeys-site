@@ -1,6 +1,8 @@
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import RepairEstimate from './components/RepairEstimate';
+import { lazy, Suspense } from "react";
+
+const RepairEstimate = lazy(() => import("./components/RepairEstimate"));
 import Services from './components/Services';
 import Reviews from './components/Reviews';
 import Location from './components/Location';
@@ -20,7 +22,9 @@ export default function App() {
 
       <main>
         <Hero />
-        <RepairEstimate />
+        <Suspense fallback={<div style={{ minHeight: 700 }} />}>
+          <RepairEstimate />
+        </Suspense>
         <Services />
         <Reviews />
         <Location />
