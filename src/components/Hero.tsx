@@ -1,4 +1,3 @@
-import { m } from 'motion/react';
 import { ArrowRight, Smartphone, Star, StarHalf } from 'lucide-react';
 
 export default function Hero() {
@@ -9,15 +8,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_10%,transparent_100%)]"></div>
       </div>
 
-      <m.div
-        initial={{ opacity: 0, y: 15 }} /* Reduced y offset from 30 */
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5, /* Faster duration */
-          ease: "easeOut" /* Simpler easing for mobile */
-        }}
-        className="max-w-4xl mx-auto z-10"
-      >
+      <div className="max-w-4xl mx-auto z-10 animate-fade-in">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 font-medium text-sm mb-6">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
@@ -49,12 +40,7 @@ export default function Hero() {
         </div>
 
         {/* Hero Google RevBadge */}
-        <m.div
-          initial={{ opacity: 0 }} /* Simplify: just fade in */
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-12 flex justify-center w-full"
-        >
+        <div className="mt-12 flex justify-center w-full animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
           <a
             href="https://www.google.com/maps/place/Imonkeys/@38.2197547,-85.6975252,14.85z/data=!4m17!1m8!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!2sImonkeys!8m2!3d38.2240889!4d-85.6895946!10e1!16s%2Fg%2F11cs3zc3x_!3m7!1s0x88690ca6821751c7:0xe79b12af729325a9!8m2!3d38.2240889!4d-85.6895946!9m1!1b1!16s%2Fg%2F11cs3zc3x_?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
@@ -82,8 +68,8 @@ export default function Hero() {
               </span>
             </div>
           </a>
-        </m.div>
-      </m.div>
+        </div>
+      </div>
     </section>
   );
 }

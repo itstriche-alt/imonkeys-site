@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import type { MouseEvent } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import logo from '../img/logo_alt.webp';
 
@@ -101,39 +100,32 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Mobile dropdown */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed top-[76px] left-4 right-4 z-40 glass-panel rounded-2xl px-4 py-4 flex flex-col gap-1 md:hidden"
-          >
-            {NAV_LINKS.map(({ label, href }) => (
-              <a
-                key={href}
-                href={href}
-                onClick={(e) => handleNavClick(e, href)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-              >
-                {label}
-              </a>
-            ))}
-            <div className="mt-2 pt-2 border-t border-white/10">
-              <a
-                href="tel:+15024435435"
-                onClick={closeMenu}
-                className="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-bold text-white bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/30 transition-all"
-              >
-                (502) 443-5435
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile dropdown - CSS animated */}
+      {menuOpen && (
+        <div
+          className="fixed top-[76px] left-4 right-4 z-40 glass-panel rounded-2xl px-4 py-4 flex flex-col gap-1 md:hidden animate-fade-in"
+        >
+          {NAV_LINKS.map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+              className="px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
+            >
+              {label}
+            </a>
+          ))}
+          <div className="mt-2 pt-2 border-t border-white/10">
+            <a
+              href="tel:+15024435435"
+              onClick={closeMenu}
+              className="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-bold text-white bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/30 transition-all"
+            >
+              (502) 443-5435
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -1,9 +1,8 @@
 import { Suspense, lazy } from 'react';
-import { LazyMotion, domAnimation } from 'motion/react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 
-// Lazy load non-critical components
+// Lazy load non-critical components (below the fold)
 const RepairEstimate = lazy(() => import('./components/RepairEstimate'));
 const Services = lazy(() => import('./components/Services'));
 const Reviews = lazy(() => import('./components/Reviews'));
@@ -12,31 +11,29 @@ const Footer = lazy(() => import('./components/Footer'));
 
 export default function App() {
   return (
-    <LazyMotion features={domAnimation}>
-      <div className="relative min-h-screen selection:bg-pink-500/30 selection:text-pink-200">
-        <div className="bg-blobs">
-          <div className="blob blob-1"></div>
-          <div className="blob blob-2"></div>
-          <div className="blob blob-3"></div>
-          <div className="blob blob-4"></div>
-        </div>
-
-        <Nav />
-
-        <main>
-          <Hero />
-          <Suspense fallback={<div className="h-96" />}>
-            <RepairEstimate />
-            <Services />
-            <Reviews />
-            <Location />
-          </Suspense>
-        </main>
-
-        <Suspense fallback={<div className="h-40" />}>
-          <Footer />
-        </Suspense>
+    <div className="relative min-h-screen selection:bg-pink-500/30 selection:text-pink-200">
+      <div className="bg-blobs">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+        <div className="blob blob-4"></div>
       </div>
-    </LazyMotion>
+
+      <Nav />
+
+      <main>
+        <Hero />
+        <Suspense fallback={<div className="h-96" />}>
+          <RepairEstimate />
+          <Services />
+          <Reviews />
+          <Location />
+        </Suspense>
+      </main>
+
+      <Suspense fallback={<div className="h-40" />}>
+        <Footer />
+      </Suspense>
+    </div>
   );
 }
