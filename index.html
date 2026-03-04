@@ -2,27 +2,40 @@
 <html lang="en">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
     html,
     body {
       margin: 0;
       background: #000;
       color: #fff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
     #root {
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
 
     #ssr-hero {
-      font-size: 2rem;
-      font-weight: 800;
+      font-size: 2.75rem;
+      font-weight: 900;
       text-align: center;
       line-height: 1.1;
+      letter-spacing: -0.05em;
+      max-width: 800px;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      #ssr-hero {
+        font-size: 4.5rem;
+      }
     }
   </style>
   <meta name="theme-color" content="#000000" />
@@ -78,7 +91,7 @@
 
 <body>
   <div id="root">
-    <h1 id="ssr-hero">Fast Device Repairs in Louisville</h1>
+    <h1 id="ssr-hero">Fast iPhone, Samsung, and Laptop Repairs in Louisville</h1>
   </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

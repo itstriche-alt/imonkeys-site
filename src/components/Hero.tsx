@@ -24,7 +24,7 @@ export default function Hero() {
         </div>
 
         <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-6 leading-[1.1]">
-          Fast Device Repairs in <span className="text-gradient">Louisville</span>
+          Fast iPhone, Samsung, and Laptop Repairs in <span className="text-gradient">Louisville</span>
         </h1>
 
         <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">

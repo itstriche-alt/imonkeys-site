@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import type { MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import logo from '../img/logo_alt.png';
+import logo from '../img/logo_alt.webp';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },

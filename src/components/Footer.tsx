@@ -1,5 +1,5 @@
 import { Facebook, Phone, Mail, MapPin, Clock } from 'lucide-react';
-import logo from '../img/logo_alt.png';
+import logo from '../img/logo_alt.webp';
 
 export default function Footer() {
   return (

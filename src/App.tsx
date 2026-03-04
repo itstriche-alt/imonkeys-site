@@ -1,12 +1,13 @@
+import { Suspense, lazy } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import { lazy, Suspense } from "react";
 
-const RepairEstimate = lazy(() => import("./components/RepairEstimate"));
-import Services from './components/Services';
-import Reviews from './components/Reviews';
-import Location from './components/Location';
-import Footer from './components/Footer';
+// Lazy load non-critical components
+const RepairEstimate = lazy(() => import('./components/RepairEstimate'));
+const Services = lazy(() => import('./components/Services'));
+const Reviews = lazy(() => import('./components/Reviews'));
+const Location = lazy(() => import('./components/Location'));
+const Footer = lazy(() => import('./components/Footer'));
 
 export default function App() {
   return (
@@ -22,15 +23,17 @@ export default function App() {
 
       <main>
         <Hero />
-        <Suspense fallback={<div style={{ minHeight: 700 }} />}>
+        <Suspense fallback={<div className="h-96" />}>
           <RepairEstimate />
+          <Services />
+          <Reviews />
+          <Location />
         </Suspense>
-        <Services />
-        <Reviews />
-        <Location />
       </main>
 
-      <Footer />
+      <Suspense fallback={<div className="h-40" />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
