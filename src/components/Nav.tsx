@@ -64,6 +64,7 @@ export default function Nav() {
                 src={logo}
                 alt="iMonkeys Logo"
                 className="h-8 sm:h-10 w-auto object-contain"
+                fetchPriority="high"
               />
             </div>
           </a>

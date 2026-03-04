@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -66,6 +65,7 @@ body {
     pointer-events: none;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
   }
 
@@ -81,14 +81,34 @@ body {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  display: none;
+  /* Hide on mobile for performance */
+}
+
+@media (min-width: 1024px) {
+  .bg-blobs {
+    display: block;
+  }
 }
 
 .blob {
   position: absolute;
-  filter: blur(140px);
+  filter: blur(80px);
+  /* Reduced from 140px for performance */
   border-radius: 50%;
-  opacity: 0.4;
+  opacity: 0.3;
+  /* Subtle opacity for better blending */
   animation: float 20s ease-in-out infinite alternate;
+  will-change: transform;
+  /* Hint for browser optimization */
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .blob {
+    filter: blur(140px);
+    opacity: 0.4;
+  }
 }
 
 .blob-1 {

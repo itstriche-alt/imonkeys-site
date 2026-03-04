@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Smartphone, RefreshCw, Star, StarHalf } from 'lucide-react';
+import { ArrowRight, Smartphone, Star, StarHalf } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -10,9 +10,12 @@ export default function Hero() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 15 }} /* Reduced y offset from 30 */
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{
+          duration: 0.5, /* Faster duration */
+          ease: "easeOut" /* Simpler easing for mobile */
+        }}
         className="max-w-4xl mx-auto z-10"
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 font-medium text-sm mb-6">
@@ -47,9 +50,9 @@ export default function Hero() {
 
         {/* Hero Google RevBadge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0 }} /* Simplify: just fade in */
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-12 flex justify-center w-full"
         >
           <a
