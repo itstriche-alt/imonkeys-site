@@ -12,7 +12,14 @@ export default function Footer() {
         <div className="sm:col-span-2 lg:col-span-1 flex flex-col gap-5">
           <a href="#home" className="inline-block w-full max-w-[220px]">
             <div className="hover:scale-105 transition-transform">
-              <img src={logo} alt="iMonkeys" className="w-full h-auto object-contain" />
+              <img
+                src={logo}
+                alt="iMonkeys"
+                className="w-full h-auto object-contain"
+                width="220"
+                height="82"
+                loading="lazy"
+              />
             </div>
           </a>
           <p className="text-slate-300 text-sm leading-relaxed max-w-[220px]">

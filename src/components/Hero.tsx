@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowRight, Smartphone, Star, StarHalf } from 'lucide-react';
 
 export default function Hero() {
@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_10%,transparent_100%)]"></div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 15 }} /* Reduced y offset from 30 */
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -49,7 +49,7 @@ export default function Hero() {
         </div>
 
         {/* Hero Google RevBadge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }} /* Simplify: just fade in */
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -82,8 +82,8 @@ export default function Hero() {
               </span>
             </div>
           </a>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </section>
   );
 }

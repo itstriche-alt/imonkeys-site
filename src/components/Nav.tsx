@@ -50,11 +50,8 @@ export default function Nav() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 animate-nav-in"
       >
         <div className="max-w-7xl mx-auto glass-panel rounded-full px-4 sm:px-6 py-3 flex items-center justify-between">
           {/* Logo */}
@@ -65,6 +62,8 @@ export default function Nav() {
                 alt="iMonkeys Logo"
                 className="h-8 sm:h-10 w-auto object-contain"
                 fetchPriority="high"
+                width="269"
+                height="100"
               />
             </div>
           </a>
@@ -100,7 +99,7 @@ export default function Nav() {
             {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile dropdown */}
       <AnimatePresence>
