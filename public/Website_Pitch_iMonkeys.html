@@ -369,13 +369,15 @@
                 <h4 class="text-sm font-bold text-rose-400 uppercase tracking-widest text-center">Before: The Original
                     Site</h4>
                 <div class="border border-white/10 rounded-xl overflow-hidden bg-navy-900 p-2 opacity-80 shadow-lg">
-                    <img src="lighthouse_before_mobile.png" alt="PageSpeed Before Mobile"
+                    <img src="lighthouse_before_mobile_new.png" alt="PageSpeed Before Mobile"
                         class="w-full rounded-lg mb-2 border border-white/5">
                     <img src="lighthouse_before_desktop.png" alt="PageSpeed Before Desktop"
                         class="w-full rounded-lg border border-white/5">
                 </div>
                 <div class="text-xs text-slate-400 text-center px-4">
-                    Poor performance and slow render times were actively frustrating customers and costing leads.
+                    Poor performance, slow render times, and surprisingly low mobile SEO scores. This severely limits
+                    visibility for customers searching on their phones—which is where the vast majority of emergency
+                    repairs start.
                 </div>
             </div>
 
@@ -472,17 +474,24 @@
 
                 <ul class="text-sm space-y-3 text-slate-200">
                     <li class="flex items-start gap-2"><i data-lucide="check"
-                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>Zero Technical
-                            Headaches:</strong> I host the site on ultra-fast global networks and manage the domain
-                        connections.</li>
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <div><strong>Zero Technical
+                                Headaches:</strong> I host the site on ultra-fast global networks and manage the domain
+                            connections.</div>
+                    </li>
                     <li class="flex items-start gap-2"><i data-lucide="check"
-                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>Advanced Security:</strong>
-                        Automated deployment of SSL certificates, firewall rules, and threat protection to keep your
-                        business safe.</li>
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <div><strong>Advanced Security:</strong>
+                            Automated deployment of SSL certificates, firewall rules, and threat protection to keep your
+                            business safe.</div>
+                    </li>
                     <li class="flex items-start gap-2"><i data-lucide="check"
-                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i> <strong>Routine Backups &amp;
-                            Updates:</strong> Server monitoring to prevent downtime. If anything ever breaks, it's my
-                        job to fix it, absolutely free of charge.</li>
+                            class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <div><strong>Routine Backups &amp;
+                                Updates:</strong> Server monitoring to prevent downtime. If anything ever breaks, it's
+                            my
+                            job to fix it, absolutely free of charge.</div>
+                    </li>
                 </ul>
             </div>
 
@@ -518,8 +527,69 @@
         </div>
     </section>
 
+    <!-- Tailwind JIT trigger for dynamically added classes -->
+    <div class="hidden cursor-pointer transition-transform duration-300 hover:scale-[1.02]"></div>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <button id="closeModal" class="absolute top-4 right-4 text-white hover:text-pink-500 transition-colors">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <img id="modalImg" src="" alt="Full size"
+            class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+    </div>
+
     <script>
         lucide.createIcons();
+
+        // Image Modal Logic
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeModal = document.getElementById('closeModal');
+
+        // Target all presentation images (they all share the rounded-lg class)
+        const presentationImages = document.querySelectorAll('img.rounded-lg');
+
+        presentationImages.forEach(img => {
+            // Add hover effects for clickability
+            img.classList.add('cursor-pointer', 'transition-transform', 'duration-300');
+            // Using setAttribute for hover class to ensure Tailwind CDN picks it up if needed
+            img.className += ' hover:scale-[1.02]';
+
+            img.addEventListener('click', () => {
+                modalImg.src = img.src;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                // Trigger reflow
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            });
+        });
+
+        const closeImageModal = () => {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        };
+
+        closeModal.addEventListener('click', closeImageModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeImageModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeImageModal();
+            }
+        });
     </script>
 </body>
 
