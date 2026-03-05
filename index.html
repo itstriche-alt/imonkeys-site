@@ -90,8 +90,7 @@
 <body>
   <style>
     /* Premium Custom Voice FAB */
-    #custom-voice-trigger,
-    #custom-voice-minimize {
+    #custom-voice-trigger {
       position: fixed;
       bottom: 24px;
       right: 24px;
@@ -109,26 +108,7 @@
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
-    #custom-voice-minimize {
-      bottom: 400px;
-      /* Positioned above the expanded widget */
-      width: 40px;
-      height: 40px;
-      background: #1A1A1A;
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.8);
-      z-index: 10001;
-    }
-
-    #custom-voice-minimize.is-visible {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1);
-    }
-
-    #custom-voice-trigger:hover,
-    #custom-voice-minimize:hover {
+    #custom-voice-trigger:hover {
       transform: scale(1.1) rotate(5deg);
       box-shadow: 0 15px 35px -10px rgba(255, 16, 117, 0.7);
     }
@@ -137,20 +117,14 @@
       transform: scale(0.95);
     }
 
-    #custom-voice-trigger svg,
-    #custom-voice-minimize svg {
+    #custom-voice-trigger svg {
       width: 28px;
       height: 28px;
       color: white;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
-    #custom-voice-minimize svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    /* Pulse animation only for main trigger */
+    /* Pulse animation */
     #custom-voice-trigger::before {
       content: '';
       position: absolute;
@@ -174,7 +148,7 @@
       }
     }
 
-    /* ElevenLabs widget styles */
+    /* ElevenLabs widget styles - Fixed to prevent touch interference */
     elevenlabs-convai {
       position: fixed !important;
       bottom: 24px !important;
@@ -182,6 +156,9 @@
       z-index: 10000 !important;
       pointer-events: none !important;
       opacity: 0 !important;
+      visibility: hidden !important;
+      width: 0 !important;
+      height: 0 !important;
       transition: opacity 0.3s ease, transform 0.3s ease !important;
       transform: translateY(20px) scale(0.95);
     }
@@ -189,6 +166,9 @@
     elevenlabs-convai.is-active {
       pointer-events: auto !important;
       opacity: 1 !important;
+      visibility: visible !important;
+      width: auto !important;
+      height: auto !important;
       transform: translateY(0) scale(1);
     }
 
@@ -198,12 +178,6 @@
         right: 16px;
         width: 52px;
         height: 52px;
-      }
-
-      #custom-voice-minimize {
-        bottom: 340px;
-        /* Adjust for mobile widget height */
-        right: 16px;
       }
     }
   </style>
@@ -217,11 +191,6 @@
     <i data-lucide="phone"></i>
   </div>
 
-  <!-- Custom Minimize Button (Only shown when active) -->
-  <div id="custom-voice-minimize" title="Minimize AI">
-    <i data-lucide="chevron-down"></i>
-  </div>
-
   <elevenlabs-convai agent-id="agent_8001kjqxtb08f88809tmsf9zhh01"></elevenlabs-convai>
 
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -232,12 +201,10 @@
       setTimeout(() => lucide.createIcons(), 100);
 
       const customTrigger = document.getElementById('custom-voice-trigger');
-      const minimizeBtn = document.getElementById('custom-voice-minimize');
       const elevenLabsWidget = document.querySelector('elevenlabs-convai');
 
       const closeWidget = () => {
         elevenLabsWidget.classList.remove('is-active');
-        minimizeBtn.classList.remove('is-visible');
         customTrigger.style.opacity = '1';
         customTrigger.style.pointerEvents = 'auto';
         customTrigger.style.transform = 'scale(1)';
@@ -247,7 +214,6 @@
         if (!elevenLabsWidget) return;
 
         elevenLabsWidget.classList.add('is-active');
-        minimizeBtn.classList.add('is-visible');
         customTrigger.style.opacity = '0';
         customTrigger.style.pointerEvents = 'none';
         customTrigger.style.transform = 'scale(0.5)';
@@ -266,7 +232,26 @@
         }, 100);
       });
 
-      minimizeBtn.addEventListener('click', closeWidget);
+      // Polling to reveal FAB when widget is closed internally
+      setInterval(() => {
+        if (elevenLabsWidget && elevenLabsWidget.shadowRoot && elevenLabsWidget.classList.contains('is-active')) {
+          // Check if the widget's internal state indicates it's closed or minimized
+          // This often means the "Start a call" button is visible again, or the main dialog is gone.
+          const startCallBtn = Array.from(elevenLabsWidget.shadowRoot.querySelectorAll('button'))
+            .find(b => b.textContent.includes('Start a call') || b.getAttribute('aria-label') === 'Start a call');
+
+          // Check for the presence of the main conversation UI element.
+          // This is a heuristic and might need adjustment if ElevenLabs changes its internal structure.
+          const conversationUI = elevenLabsWidget.shadowRoot.querySelector('[role="dialog"]') ||
+            elevenLabsWidget.shadowRoot.querySelector('.flex.flex-col'); // Common container for the chat UI
+
+          if (startCallBtn && !conversationUI) {
+            // If "Start a call" is visible AND the main conversation UI is NOT visible,
+            // it implies the widget has returned to its initial state.
+            closeWidget();
+          }
+        }
+      }, 1000);
     });
   </script>
 
