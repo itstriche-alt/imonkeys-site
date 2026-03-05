@@ -532,12 +532,15 @@
 
     <!-- Image Modal -->
     <div id="imageModal"
-        class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <button id="closeModal" class="absolute top-4 right-4 text-white hover:text-pink-500 transition-colors">
-            <i data-lucide="x" class="w-8 h-8"></i>
+        class="fixed inset-0 z-50 bg-black/95 hidden items-start justify-center p-4 sm:p-8 opacity-0 transition-opacity duration-300 overflow-y-auto">
+        <button id="closeModal"
+            class="fixed top-4 right-4 z-[60] bg-navy-900/80 p-2 rounded-full text-white hover:text-pink-500 transition-colors backdrop-blur-sm border border-white/10">
+            <i data-lucide="x" class="w-6 h-6 sm:w-8 sm:h-8"></i>
         </button>
-        <img id="modalImg" src="" alt="Full size"
-            class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+        <div class="relative w-full max-w-6xl my-auto flex justify-center mt-12 mb-12">
+            <img id="modalImg" src="" alt="Full size"
+                class="w-full h-auto object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+        </div>
     </div>
 
     <script>
@@ -581,7 +584,7 @@
 
         closeModal.addEventListener('click', closeImageModal);
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+            if (e.target !== modalImg) {
                 closeImageModal();
             }
         });
