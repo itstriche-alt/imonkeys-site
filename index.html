@@ -88,170 +88,17 @@
 </head>
 
 <body>
-  <style>
-    /* Premium Custom Voice FAB */
-    #custom-voice-trigger {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #FF1075 0%, #818cf8 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px -5px rgba(255, 16, 117, 0.5);
-      cursor: pointer;
-      z-index: 9999;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-    }
 
-    #custom-voice-trigger:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 15px 35px -10px rgba(255, 16, 117, 0.7);
-    }
-
-    #custom-voice-trigger:active {
-      transform: scale(0.95);
-    }
-
-    #custom-voice-trigger svg {
-      width: 28px;
-      height: 28px;
-      color: white;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    }
-
-    /* Pulse animation */
-    #custom-voice-trigger::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #FF1075;
-      border-radius: 50%;
-      z-index: -1;
-      animation: fab-pulse 2s infinite;
-    }
-
-    @keyframes fab-pulse {
-      0% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      100% {
-        transform: scale(1.6);
-        opacity: 0;
-      }
-    }
-
-    /* ElevenLabs widget styles - Fixed to prevent touch interference */
-    elevenlabs-convai {
-      position: fixed !important;
-      bottom: 24px !important;
-      right: 24px !important;
-      z-index: 10000 !important;
-      pointer-events: none !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      width: 0 !important;
-      height: 0 !important;
-      transition: opacity 0.3s ease, transform 0.3s ease !important;
-      transform: translateY(20px) scale(0.95);
-    }
-
-    elevenlabs-convai.is-active {
-      pointer-events: auto !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      width: auto !important;
-      height: auto !important;
-      transform: translateY(0) scale(1);
-    }
-
-    @media (max-width: 640px) {
-      #custom-voice-trigger {
-        bottom: 16px;
-        right: 16px;
-        width: 52px;
-        height: 52px;
-      }
-    }
-  </style>
 
   <div id="root">
     <h1 id="ssr-hero">Fast iPhone, Samsung, and Laptop Repairs in Louisville</h1>
   </div>
 
-  <!-- Custom FAB Trigger -->
-  <div id="custom-voice-trigger" title="Call AI Assistant">
-    <i data-lucide="phone"></i>
-  </div>
-
-  <elevenlabs-convai agent-id="agent_8001kjqxtb08f88809tmsf9zhh01"></elevenlabs-convai>
-
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => lucide.createIcons(), 100);
-
-      const customTrigger = document.getElementById('custom-voice-trigger');
-      const elevenLabsWidget = document.querySelector('elevenlabs-convai');
-
-      const closeWidget = () => {
-        elevenLabsWidget.classList.remove('is-active');
-        customTrigger.style.opacity = '1';
-        customTrigger.style.pointerEvents = 'auto';
-        customTrigger.style.transform = 'scale(1)';
-      };
-
-      customTrigger.addEventListener('click', () => {
-        if (!elevenLabsWidget) return;
-
-        elevenLabsWidget.classList.add('is-active');
-        customTrigger.style.opacity = '0';
-        customTrigger.style.pointerEvents = 'none';
-        customTrigger.style.transform = 'scale(0.5)';
-
-        // Attempt to find and click "Start a call" in shadow DOM
-        let attempts = 0;
-        const tryTrigger = setInterval(() => {
-          if (elevenLabsWidget.shadowRoot) {
-            const innerButtons = elevenLabsWidget.shadowRoot.querySelectorAll('button');
-            if (innerButtons.length > 0) {
-              innerButtons[0].click();
-              clearInterval(tryTrigger);
-            }
-          }
-          if (attempts++ > 40) clearInterval(tryTrigger);
-        }, 100);
-      });
-
-      // Polling to reveal FAB when widget is closed internally
-      setInterval(() => {
-        if (elevenLabsWidget && elevenLabsWidget.shadowRoot && elevenLabsWidget.classList.contains('is-active')) {
-          // Check if the widget's internal state indicates it's closed or minimized
-          // This often means the "Start a call" button is visible again, or the main dialog is gone.
-          const startCallBtn = Array.from(elevenLabsWidget.shadowRoot.querySelectorAll('button'))
-            .find(b => b.textContent.includes('Start a call') || b.getAttribute('aria-label') === 'Start a call');
-
-          // Check for the presence of the main conversation UI element.
-          // This is a heuristic and might need adjustment if ElevenLabs changes its internal structure.
-          const conversationUI = elevenLabsWidget.shadowRoot.querySelector('[role="dialog"]') ||
-            elevenLabsWidget.shadowRoot.querySelector('.flex.flex-col'); // Common container for the chat UI
-
-          if (startCallBtn && !conversationUI) {
-            // If "Start a call" is visible AND the main conversation UI is NOT visible,
-            // it implies the widget has returned to its initial state.
-            closeWidget();
-          }
-        }
-      }, 1000);
     });
   </script>
 
